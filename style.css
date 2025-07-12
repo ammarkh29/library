@@ -1,0 +1,23 @@
+body {
+    display: flex;
+
+    gap: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container {
+    display: grid;
+
+    grid-template-columns: 30% 30% 30%;
+    grid-auto-rows: fit-content(33vw);
+    gap: 20px;
+}
+
+.bookTile {
+    border: 5px solid black;
+}
