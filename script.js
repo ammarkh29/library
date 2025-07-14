@@ -1,5 +1,6 @@
 const myLibrary = [];
 
+
 function Book(title, author, numPages, read) {
     this.title = title
     this.author = author
@@ -7,8 +8,12 @@ function Book(title, author, numPages, read) {
     this.read = read
     this.id = crypto.randomUUID()
     this.info = function() {
-        return ["Title: " + this.title, "Author: " + this.author, "Pages: "+ this.numPages, "Read? " + this.read, "ID: " + this.id]
+        return ["Title: " + this.title, "Author: " + this.author, "Pages: "+ this.pages, "Read? " + this.read, "ID: " + this.id]
     }
+}
+
+Book.prototype.toggleRead = function () {
+    this.read = !this.read
 }
 
 function addBookToLibrary(title, author, numPages, read) {
@@ -43,7 +48,33 @@ for (let index = 0; index < myLibrary.length; index++) {
 
 button = document.querySelector("#submit")
 
-button.addEventListener("click", function (e) {
-    
+const form = document.querySelector('.form');
+
+form.addEventListener('submit', function (e) {
+    e.preventDefault(); // stop the page from reloading
+
+    const formData = new FormData(form);
+    const title = formData.get('title');
+    const author = formData.get('author');
+    const pages = formData.get('pages');
+    const read = formData.get('read') !== null; // checkbox returns null if unchecked
+
+    const newBook = new Book(title, author, pages, read);
+    myLibrary.push(newBook);
+
+    // Add card to DOM
+    const card = document.createElement('div');
+    card.classList.add('bookTile');
+    for (let y = 0; y < newBook.info().length; y++) {
+        const info = newBook.info()[y];
+        bookInfo = document.createElement("p")
+        bookInfo.textContent = info
+        card.appendChild(bookInfo)
+    }
+
+    container = document.querySelector(".container")
+    container.appendChild(card);
+
 });
+
 
