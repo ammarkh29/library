@@ -1,16 +1,20 @@
 const myLibrary = [];
 
 
-function Book(title, author, numPages, read) {
-    this.title = title
-    this.author = author
-    this.pages = numPages
-    this.read = read
-    this.id = crypto.randomUUID()
-    this.info = function() {
+class Book {
+    constructor(title, author, numPages, read) {
+        this.title = title
+        this.author = author
+        this.pages = numPages
+        this.read = read
+        this.id = crypto.randomUUID()
+    }
+
+    info(){
         return ["Title: " + this.title, "Author: " + this.author, "Pages: "+ this.pages, "Read? " + this.read, "ID: " + this.id]
     }
 }
+
 
 Book.prototype.toggleRead = function () {
     this.read = !this.read
